@@ -9,6 +9,12 @@ const PlaceDetail = props => {
     );
 };
 
+PlaceDetail.navigationOptions = navData => {
+    return {
+        headerTitle: navData.navigation.getParam('placeTitle')
+    };
+};
+
 const styles = StyleSheet.create({});
 
 export default PlaceDetail;
