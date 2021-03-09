@@ -1,20 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 const Map = props => {
-    const mapRegion = {
+    const [selectedLocation, setSelectedLocation] = useState();
+
+    let mapRegion = {
         latitude: 37.78,
         longitude: -122.43,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
     };
 
+    const selectLocationHandler = event => {
+        setSelectedLocation({
+            lat: event.nativeEvent.coordinate.latitude,
+            lng: event.nativeEvent.coordinate.longitude,
+        });
+    };
+
+    let markerCoordinates;
+
+    if (selectedLocation) {
+        markerCoordinates = {
+            latitude: selectedLocation.lat,
+            longitude: selectedLocation.lng
+        };
+        mapRegion.latitude = selectedLocation.lat;
+        mapRegion.longitude = selectedLocation.lng;
+
+    }
+
     return (
         <MapView
             region={mapRegion}
             style={styles.map}
-        />
+            onPress={selectLocationHandler}
+        >
+            {markerCoordinates && <Marker title='Picked Location' coordinate={markerCoordinates}></Marker>}
+        </MapView>
     );
 };
 
