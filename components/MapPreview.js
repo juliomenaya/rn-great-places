@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Image, View } from 'react-native'
+import { StyleSheet, Image, View, TouchableOpacity } from 'react-native'
 import ENV from '../env';
 
 const MapPreview = props => {
@@ -16,9 +16,9 @@ const MapPreview = props => {
         },${lng}&key=${ENV.googleApiKey}`;
     }
     return (
-        <View style={{...props.style, ...styles.mapPreview}}>
+        <TouchableOpacity onPress={props.onPress} style={{...props.style, ...styles.mapPreview}}>
             {props.location ? <Image style={styles.mapImage} source={{ uri: imagePreview }}/> : props.children}
-        </View>
+        </TouchableOpacity>
     );
 };
 
