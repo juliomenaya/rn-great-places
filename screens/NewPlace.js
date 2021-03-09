@@ -3,10 +3,12 @@ import { StyleSheet, Text, View, TextInput, Button, ScrollView } from 'react-nat
 import Colors from '../constants/Colors';
 import { useDispatch } from 'react-redux';
 import * as placesActions from '../store/places-actions';
+import ImagePicker from '../components/ImgPicker';
 
 
 const NewPlace = props => {
     const [titleValue, setTitleValue] = useState('');
+    const [selectedImage, setSelectedImage] = useState()
     const dispatch = useDispatch();
 
     const titleChangeHandler = text => {
@@ -14,8 +16,12 @@ const NewPlace = props => {
     };
 
     const savePlaceHandler = () => {
-        dispatch(placesActions.addPlace(titleValue));
+        dispatch(placesActions.addPlace(titleValue, selectedImage));
         props.navigation.goBack();
+    };
+
+    const imageTakeHandler = imagePath => {
+        setSelectedImage(imagePath);
     };
 
     return (
@@ -27,6 +33,7 @@ const NewPlace = props => {
                     onChangeText={titleChangeHandler}
                     value={titleValue}
                 />
+                <ImagePicker onImageTaken={imageTakeHandler}/>
                 <Button
                     title='Save place'
                     color={Colors.primary}
