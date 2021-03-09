@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, ScrollView } from 'react-native';
 import Colors from '../constants/Colors';
+import LocationPicker from '../components/LocationPicker';
 import { useDispatch } from 'react-redux';
 import * as placesActions from '../store/places-actions';
 import ImagePicker from '../components/ImgPicker';
@@ -34,6 +35,7 @@ const NewPlace = props => {
                     value={titleValue}
                 />
                 <ImagePicker onImageTaken={imageTakeHandler}/>
+                <LocationPicker />
                 <Button
                     title='Save place'
                     color={Colors.primary}
