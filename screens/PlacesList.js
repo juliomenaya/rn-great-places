@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { Platform, FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-// import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-// import CustomHeaderButton from '../components/CustomHeaderButton';
+import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import Colors from '../constants/Colors';
 import { useSelector, useDispatch } from 'react-redux';
 import PlaceItem from '../components/PlaceItem';
 import * as placesActions from '../store/places-actions';
@@ -39,7 +38,7 @@ const PlacesList = props => {
             />
             <View style={styles.buttonContainer}>
                 <TouchableOpacity onPress={addNewPlaceHandler}>
-                    <Text>+</Text>
+                    <Text style={{color: 'white'}}>+</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -49,19 +48,19 @@ const PlacesList = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#456783'
     },
     buttonContainer: {
         flexDirection: 'row',
         position: 'absolute',
         right: 10,
         bottom: 10,
-        backgroundColor: 'pink',
+        backgroundColor: Colors.primary,
         height: 50,
         width: 50,
         borderRadius: 25,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderWidth: 1
     },
     
 });
@@ -69,17 +68,6 @@ const styles = StyleSheet.create({
 PlacesList.navigationOptions = navData => {
     return {
         headerTitle: 'All places',
-        // headerRight: (
-        //     <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        //         <Item
-        //             title='Add Place'
-        //             iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
-        //             onPress={() => {
-        //                 navData.navigation.navigate('NewPlaces');
-        //             }}
-        //         />
-        //     </HeaderButtons>
-        // )
     };
 };
 
